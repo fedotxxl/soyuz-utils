@@ -1,0 +1,32 @@
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+group = 'io.belov'
+version = '1.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url "https://mymavenrepo.com/repo/SbfutqGx3LM3VdY6CLKu/"
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            url "https://mymavenrepo.com/repo/${myMavenRepoWriteToken}/"
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+dependencies {
+    compile 'commons-validator:commons-validator:1.4.0'
+}
