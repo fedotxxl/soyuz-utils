@@ -1,6 +1,8 @@
 apply plugin: 'maven-publish'
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: "groovy"
+
 
 group = 'io.belov'
 version = '1.0'
@@ -11,6 +13,10 @@ repositories {
     maven {
         url "https://mymavenrepo.com/repo/SbfutqGx3LM3VdY6CLKu/"
     }
+}
+
+ext {
+	myMavenRepoWriteToken = null
 }
 
 publishing {
@@ -29,4 +35,8 @@ publishing {
 
 dependencies {
     compile 'commons-validator:commons-validator:1.4.0'
+
+    //test
+    testCompile "org.codehaus.groovy:groovy-all:2.3.6"
+    testCompile "org.spockframework:spock-core:1.0-groovy-2.3"
 }
