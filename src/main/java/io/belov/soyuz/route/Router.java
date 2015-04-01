@@ -1,42 +1,46 @@
 package io.belov.soyuz.route;
 
+import io.belov.soyuz.utils.is;
+
 import javax.script.*;import javax.script.Bindings;import javax.script.ScriptEngine;import javax.script.ScriptEngineManager;import javax.script.ScriptException;import javax.script.SimpleBindings;
 import java.io.InputStream;
 import java.io.Reader;import java.lang.Object;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by fbelov on 01.04.15.
  */
 public class Router {
 
-    private static final Object ANY = new Object();
-
-//    private Object routes = null;
+    private final Routes routes;
 
     public Router(Reader reader) throws ScriptException {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("javascript");
         Bindings bindings = new SimpleBindings();
         engine.eval(reader, bindings);
+        RouteBuilder routeBuilder = new RouteBuilder();
 
         Map<Object, Object> routes = (Map) ((Map) bindings.get("nashorn.global")).get("vRoutes");
-        mapRoutes(routes, "");
+        mapRoutes(routeBuilder, routes, "");
+
+        this.routes = routeBuilder.build();
     }
 
-    private void mapRoutes(Map<Object, Object> routes, String path) {
+    private void mapRoutes(RouteBuilder routeBuilder, Map<Object, Object> routes, String path) {
         for (Map.Entry e : routes.entrySet()) {
-            Object v = e.getValue();
-            if (v instanceof Map) {
-                mapRoutes((Map<Object, Object>) v, path + "." + e.getKey());
+            Object value = e.getValue();
+            String part = (String) e.getKey();
+
+            String currentPath = (is.tt(path)) ? path + "." + part : part;
+            if (value instanceof Map) {
+                mapRoutes(routeBuilder, (Map<Object, Object>) value, currentPath);
             } else {
-                String url = (String) e.getValue();
+                routeBuilder.add(currentPath, (String) value);
             }
         }
-    }
-
-    private void mapUrl(String url) {
-
     }
 
     public String getRoutePath(String url) {
@@ -52,17 +56,27 @@ public class Router {
             }
         }
 
-        Routes routes = new Routes();
-        String[] parts = url.split("/");
+        Routes routes = this.routes;
+
+        Iterable<String> parts = Utils.splitPath(url);
         for (String part : parts) {
-            routes = routes.get(part);
+            routes = routes.getChild(part);
             if (routes == null) break;
         }
 
         if (routes != null) {
-            return routes.getPath();
+            return routes.getRouteName();
         } else {
             return null;
+        }
+    }
+
+    public static class Utils {
+        public static Iterable<String> splitPath(String path) {
+            return Arrays
+                    .stream(path.split("/"))
+                    .filter(is::tt)
+                    .collect(Collectors.toList());
         }
     }
 }
