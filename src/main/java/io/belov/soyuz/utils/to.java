@@ -10,8 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class to {
 
@@ -97,6 +96,30 @@ public class to {
         Map a = new HashMap();
         a.put(key, value);
         return a;
+    }
+
+    public static <T> List<T> list(T value) {
+        List<T> answer = new ArrayList<>();
+        answer.add(value);
+        return answer;
+    }
+
+    public static <T> List<T> list(T... value) {
+        List<T> answer = new ArrayList<>();
+        Collections.addAll(answer, value);
+        return answer;
+    }
+
+    public static <T> Set<T> set(T value) {
+        Set<T> answer = new HashSet<>();
+        answer.add(value);
+        return answer;
+    }
+
+    public static <T> Set<T> set(T... value) {
+        Set<T> answer = new HashSet<>();
+        Collections.addAll(answer, value);
+        return answer;
     }
 
     private static Integer doIntConvert(BigDecimal val) {
