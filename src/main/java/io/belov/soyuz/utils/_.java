@@ -1,5 +1,6 @@
 package io.belov.soyuz.utils;
 
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
@@ -13,6 +14,11 @@ public class _ {
         } else {
             return supplier.get();
         }
+    }
+
+    public static <T> T doAndReturn(T returnValue, Runnable runnable) {
+        runnable.run();
+        return returnValue;
     }
 
     public static String s(String value, Object... params) {
