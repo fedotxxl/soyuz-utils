@@ -15,6 +15,14 @@ public class _ {
         }
     }
 
+    public static String s(String value, Object... params) {
+        for (int i = 0; i < params.length; i++) {
+            value = value.replace("{" + i + "}", params[i].toString());
+        }
+
+        return value;
+    }
+
     public static String trim(String o) {
         if (o == null) {
             return null;
