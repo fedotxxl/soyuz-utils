@@ -1,5 +1,6 @@
 package io.belov.soyuz.utils;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -13,6 +14,14 @@ public class _ {
             return object;
         } else {
             return supplier.get();
+        }
+    }
+
+    public static <T> T or(Optional<T> object, Supplier<Optional<T>> supplier) {
+        if (object != null && object.isPresent()) {
+            return object.get();
+        } else {
+            return supplier.get().orElse(null);
         }
     }
 
