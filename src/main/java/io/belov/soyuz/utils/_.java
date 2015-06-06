@@ -2,6 +2,7 @@ package io.belov.soyuz.utils;
 
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -22,6 +23,14 @@ public class _ {
             return object.get();
         } else {
             return supplier.get().orElse(null);
+        }
+    }
+
+    public static <T, R> R nullOr(T object, Function<T, R> function) {
+        if (object == null) {
+            return null;
+        } else {
+            return function.apply(object);
         }
     }
 
