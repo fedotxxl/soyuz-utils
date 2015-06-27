@@ -11,6 +11,10 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 public class to {
 
@@ -120,6 +124,22 @@ public class to {
         Set<T> answer = new HashSet<>();
         Collections.addAll(answer, value);
         return answer;
+    }
+
+    public static <T> Stream<T> stream(T[] array) {
+        return Arrays.stream(array);
+    }
+
+    public static IntStream stream(int[] array) {
+        return Arrays.stream(array);
+    }
+
+    public static LongStream stream(long[] array) {
+        return Arrays.stream(array);
+    }
+
+    public static DoubleStream stream(double[] array) {
+        return Arrays.stream(array);
     }
 
     private static Integer doIntConvert(BigDecimal val) {
