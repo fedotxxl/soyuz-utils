@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
@@ -124,6 +127,12 @@ public class to {
         Set<T> answer = new HashSet<>();
         Collections.addAll(answer, value);
         return answer;
+    }
+
+    public static Date date(LocalDateTime localDateTime) {
+        //http://blog.progs.be/542/date-to-java-time
+        Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        return Date.from(instant);
     }
 
     public static <T> Stream<T> stream(T[] array) {
