@@ -5,10 +5,9 @@ apply plugin: "groovy"
 
 
 group = 'io.belov'
-version = '1.20'
+version = '1.21'
 
 repositories {
-    mavenLocal()
     mavenCentral()
     maven {
         url "https://mymavenrepo.com/repo/SbfutqGx3LM3VdY6CLKu/"

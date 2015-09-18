@@ -129,6 +129,18 @@ public class to {
         return answer;
     }
 
+    public static <T> SortedSet<T> sortedSet(T value) {
+        SortedSet<T> answer = new TreeSet<>();
+        answer.add(value);
+        return answer;
+    }
+
+    public static <T> SortedSet<T> sortedSet(T... value) {
+        SortedSet<T> answer = new TreeSet<>();
+        Collections.addAll(answer, value);
+        return answer;
+    }
+
     public static Date date(LocalDateTime localDateTime) {
         //http://blog.progs.be/542/date-to-java-time
         Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
