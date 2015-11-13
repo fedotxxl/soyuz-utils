@@ -4,6 +4,7 @@
  */
 package io.belov.soyuz.utils;
 
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -109,6 +110,10 @@ public class to {
         List<T> answer = new ArrayList<>();
         answer.add(value);
         return answer;
+    }
+
+    public static <T> List<T> list(Iterator<T> iterator) {
+        return Lists.newArrayList(iterator);
     }
 
     public static <T> List<T> list(T... value) {
