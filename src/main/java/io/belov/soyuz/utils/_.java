@@ -34,8 +34,9 @@ public class _ {
         }
     }
 
-    public static <T> T doAndReturn(T returnValue, Runnable runnable) {
-        runnable.run();
+    public static <T> T doAndReturn(T returnValue, Consumer<T> runnable) {
+        runnable.accept(returnValue);
+
         return returnValue;
     }
 
