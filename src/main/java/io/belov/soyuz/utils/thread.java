@@ -36,4 +36,18 @@ public class thread {
         return t;
     }
 
+    public static Thread startDaemonForever(long sleepInMillis, Runnable target) {
+        Thread t = new Thread(() -> {
+            while (true) {
+                target.run();
+
+                sleep(sleepInMillis);
+            }
+        });
+
+        t.setDaemon(true);
+        t.start();
+
+        return t;
+    }
 }
