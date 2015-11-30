@@ -84,6 +84,26 @@ public class to {
         return l(val, null);
     }
 
+    public static Boolean b(String val) {
+        return b(val, null);
+    }
+
+    public static Boolean b(String val, Boolean defaultValue) {
+        return b(val, defaultValue, true);
+    }
+
+    public static Boolean b(Object val, Boolean defaultValue, boolean silent) {
+        if (val != null) {
+            try {
+                return doBooleanConvert(val);
+            } catch (Exception e) {
+                if (!silent) log.warn("Cannot convert " + val + " to boolean", e);
+            }
+        }
+
+        return defaultValue;
+    }
+
     public static URI uri(String url) {
         try {
             return new URI(url);
@@ -198,6 +218,18 @@ public class to {
 
     private static Long doLongConvert(Object val) {
         return Long.parseLong(val.toString());
+    }
+
+    private static Boolean doBooleanConvert(String val) {
+        return Boolean.valueOf(val);
+    }
+
+    private static Boolean doBooleanConvert(Boolean val) {
+        return val;
+    }
+
+    private static Boolean doBooleanConvert(Object val) {
+        return Boolean.valueOf(val.toString());
     }
 
 }
