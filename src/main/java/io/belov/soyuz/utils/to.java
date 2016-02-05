@@ -126,6 +126,20 @@ public class to {
         return a;
     }
 
+    public static Map map(Object... keyValues) {
+        if (keyValues.length % 2 != 0) {
+            throw new IllegalStateException();
+        }
+
+        Map a = new HashMap();
+
+        for (int i = 0; i < keyValues.length; i = i + 2) {
+            a.put(keyValues[i], keyValues[i + 1]);
+        }
+
+        return a;
+    }
+
     public static <T> List<T> list(T value) {
         List<T> answer = new ArrayList<>();
         answer.add(value);
