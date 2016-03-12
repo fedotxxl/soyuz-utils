@@ -5,7 +5,7 @@ apply plugin: "groovy"
 
 
 group = "io.belov"
-version = "1.26"
+version = "1.27"
 
 repositories {
     mavenCentral()
