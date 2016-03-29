@@ -5,7 +5,7 @@ apply plugin: "groovy"
 
 
 group = "io.belov"
-version = "1.27"
+version = "1.28"
 
 repositories {
     mavenCentral()
@@ -33,6 +33,7 @@ publishing {
 }
 
 dependencies {
+    compile "io.belov.soyuz:soyuz-is-to:1.8"
     compile "com.google.guava:guava:18.0"
     compile "commons-validator:commons-validator:1.4.0"
     compile "org.slf4j:slf4j-api:1.7.2"
