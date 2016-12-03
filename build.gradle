@@ -1,44 +1,13 @@
-apply plugin: "maven-publish"
-apply plugin: "java"
-apply plugin: "idea"
-apply plugin: "groovy"
-
+apply from: "https://mymavenrepo.com/repo/${myMavenRepoReadToken}/soyuz-gradle/1.0/base-1.0.gradle"
 
 group = "io.belov"
-version = "1.28"
-
-repositories {
-    mavenCentral()
-    maven {
-        url "https://mymavenrepo.com/repo/SbfutqGx3LM3VdY6CLKu/"
-    }
-}
-
-ext {
-	//myMavenRepoWriteToken = null
-}
-
-publishing {
-    repositories {
-        maven {
-            url "https://mymavenrepo.com/repo/${myMavenRepoWriteToken}/"
-        }
-    }
-
-    publications {
-        maven(MavenPublication) {
-            from components.java
-        }
-    }
-}
+version = "1.29"
 
 dependencies {
-    compile "io.belov.soyuz:soyuz-is-to:1.8"
-    compile "com.google.guava:guava:18.0"
-    compile "commons-validator:commons-validator:1.4.0"
-    compile "org.slf4j:slf4j-api:1.7.2"
+    compile cl.log.api
+    compile cl.utils.soyuz.isTo
+    compile cl.utils.guava
+    compile cl.utils.commons.validator
 
-    //test
-    testCompile "org.codehaus.groovy:groovy-all:2.3.6"
-    testCompile "org.spockframework:spock-core:1.0-groovy-2.3"
+    testCompile cl.test.spock.core
 }
